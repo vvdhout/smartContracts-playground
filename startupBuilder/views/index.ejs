@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Startup Builder</title>
+        <style>
+        body {
+            background-color:#F0F0F0;
+            padding: 2em;
+            font-family: 'Raleway','Source Sans Pro', 'Arial';
+        }
+        .container {
+            width: 50%;
+            margin: 0 auto;
+        }
+        .bold { 
+            font-weight: bolder;
+        }
+        .row {
+            margin-bottom:10px;
+        }
+        button {
+            margin: 2em 0;
+            padding: 1em 4em;
+            display:block;
+        }
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+    </head>
+
+    <body>
+        <div class="container">
+            <h1>Startup Builder (dApp)</h1>
+
+            <div class="row">
+                <label class="bold">Startup Idea:</label>
+                <input type="text" name="idea" id="idea">
+            </div>
+
+            <div class="row">
+                <label class="bold">CEO:</label>
+                <input type="text" name="ceo" id="ceo">
+            </div>
+
+            <div class="row">
+                <label class="bold">CFO:</label>
+                <input type="text" name="cfo" id="cfo">
+            </div>
+            <div class="row">
+                <label class="bold">COO:</label>
+                <input type="text" name="coo" id="coo">
+            </div>
+
+            <div class="row">
+                <label class="bold">Cash ($):</label>
+                <input type="text" name="cash" id="cash" disabled>
+            </div>
+
+            <div class="row">
+                <label class="bold">Invest (in $):</label>
+                <input type="number" name="invest" id="invest">
+            </div>
+
+            <button id="claim-button" onclick="claimButtonClicked()">Submit</button>
+        </div>
+
+        <script>    
+         
+            if(typeof web3 != 'undefined') { 
+                web3 = new Web3(web3.currentProvider) // what Metamask injected 
+            } else {
+                // Instantiate and set Ganache as your provider
+                web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+            }
+
+            // The default (top) wallet account from a list of test accounts 
+            web3.eth.defaultAccount = web3.eth.accounts[0];
+
+            // The interface definition for your smart contract (the ABI) 
+            var startup = web3.eth.contract(
+                [
+                    {
+                        "constant": true,
+                        "inputs": [],
+                        "name": "profitPerMonth",
+                        "outputs": [
+                            {
+                                "name": "",
+                                "type": "int256"
+                            }
+                        ],
+                        "payable": false,
+                        "stateMutability": "view",
+                        "type": "function"
+                    },
+                    {
+                        "constant": true,
+                        "inputs": [],
+                        "name": "coo",
+                        "outputs": [
+                            {
+                                "name": "",
+                                "type": "address"
+                            }
+                        ],
+                        "payable": false,
+                        "stateMutability": "view",
+                        "type": "function"
+                    },
+                    {
+                        "constant": true,
+                        "inputs": [],
+                        "name": "cfo",
+                        "outputs": [
+                            {
+                                "name": "",
+                                "type": "address"
+                            }
+                        ],
+                        "payable": false,
+                        "stateMutability": "view",
+                        "type": "function"
+                    },
+                    {
+                        "constant": false,
+                        "inputs": [
+                            {
+                                "name": "newCEO",
+                                "type": "address"
+                            }
+                        ],
+                        "name": "setCEO",
+                        "outputs": [
+                            {
+                                "name": "message",
+                                "type": "string"
+                            }
+                        ],
+                        "payable": false,
+                        "stateMutability": "nonpayable",
+                        "type": "function"
+                    },
+                    {
+                        "constant": false,
+                        "inputs": [
+                            {
+                                "name": "newCOO",
+                                "type": "address"
+                            }
+                        ],
+                        "name": "setCOO",
+                        "outputs": [
+                            {
+                                "name": "message",
+                                "type": "string"
+                            }
+                        ],
+                        "payable": false,
+                        "stateMutability": "nonpayable",
+                        "type": "function"
+                    },
+                    {
+                        "constant": true,
+                        "inputs": [],
+                        "name": "viewCash",
+                        "outputs": [
+                            {
+                                "name": "",
+                                "type": "int256"
+                            }
+                        ],
+                        "payable": false,
+                        "stateMutability": "view",
+                        "type": "function"
+                    },
+                    {
+                        "constant": false,
+                        "inputs": [
+                            {
+                                "name": "cashIn",
+                                "type": "int256"
+                            }
+                        ],
+                        "name": "invest",
+                        "outputs": [],
+                        "payable": false,
+                        "stateMutability": "nonpayable",
+                        "type": "function"
+                    },
+                    {
+                        "constant": true,
+                        "inputs": [],
+                        "name": "getIdea",
+                        "outputs": [
+                            {
+                                "name": "",
+                                "type": "string"
+                            }
+                        ],
+                        "payable": false,
+                        "stateMutability": "view",
+                        "type": "function"
+                    },
+                    {
+                        "constant": false,
+                        "inputs": [
+                            {
+                                "name": "newCFO",
+                                "type": "address"
+                            }
+                        ],
+                        "name": "setCFO",
+                        "outputs": [
+                            {
+                                "name": "message",
+                                "type": "string"
+                            }
+                        ],
+                        "payable": false,
+                        "stateMutability": "nonpayable",
+                        "type": "function"
+                    },
+                    {
+                        "constant": true,
+                        "inputs": [],
+                        "name": "messageReturned",
+                        "outputs": [
+                            {
+                                "name": "",
+                                "type": "string"
+                            }
+                        ],
+                        "payable": false,
+                        "stateMutability": "view",
+                        "type": "function"
+                    },
+                    {
+                        "constant": false,
+                        "inputs": [
+                            {
+                                "name": "newIdea",
+                                "type": "string"
+                            }
+                        ],
+                        "name": "changeIdea",
+                        "outputs": [],
+                        "payable": false,
+                        "stateMutability": "nonpayable",
+                        "type": "function"
+                    },
+                    {
+                        "constant": true,
+                        "inputs": [],
+                        "name": "getCFO",
+                        "outputs": [
+                            {
+                                "name": "",
+                                "type": "address"
+                            }
+                        ],
+                        "payable": false,
+                        "stateMutability": "view",
+                        "type": "function"
+                    },
+                    {
+                        "constant": true,
+                        "inputs": [],
+                        "name": "idea",
+                        "outputs": [
+                            {
+                                "name": "",
+                                "type": "string"
+                            }
+                        ],
+                        "payable": false,
+                        "stateMutability": "view",
+                        "type": "function"
+                    },
+                    {
+                        "constant": true,
+                        "inputs": [],
+                        "name": "ceo",
+                        "outputs": [
+                            {
+                                "name": "",
+                                "type": "address"
+                            }
+                        ],
+                        "payable": false,
+                        "stateMutability": "view",
+                        "type": "function"
+                    },
+                    {
+                        "constant": true,
+                        "inputs": [],
+                        "name": "cash",
+                        "outputs": [
+                            {
+                                "name": "",
+                                "type": "int256"
+                            }
+                        ],
+                        "payable": false,
+                        "stateMutability": "view",
+                        "type": "function"
+                    },
+                    {
+                        "constant": true,
+                        "inputs": [],
+                        "name": "getCEO",
+                        "outputs": [
+                            {
+                                "name": "",
+                                "type": "address"
+                            }
+                        ],
+                        "payable": false,
+                        "stateMutability": "view",
+                        "type": "function"
+                    },
+                    {
+                        "constant": true,
+                        "inputs": [],
+                        "name": "getCOO",
+                        "outputs": [
+                            {
+                                "name": "",
+                                "type": "address"
+                            }
+                        ],
+                        "payable": false,
+                        "stateMutability": "view",
+                        "type": "function"
+                    },
+                    {
+                        "inputs": [],
+                        "payable": false,
+                        "stateMutability": "nonpayable",
+                        "type": "constructor"
+                    }
+                ]
+            );
+            // Grab the contract at specified deployed address with the interface defined by the ABI
+            var startup = startup.at('0x098fdffb44ff886000d26d0e36954935f45d2c20');
+            
+            // Get and display ceo
+            startup.getCEO(function (error, result) {
+                if (!error) {
+                    $('input[name=ceo]').val(result);
+                } else { 
+                    console.log(error);
+                }
+            });
+
+            // Get and display cfo
+            startup.getCFO(function (error, result) {
+                if (!error) {
+                    $('input[name=cfo]').val(result);
+                } else { 
+                    console.log(error);
+                }
+            });
+
+            // Get and display coo
+            startup.getCOO(function (error, result) {
+                if (!error) {
+                    $('input[name=coo]').val(result);
+                } else { 
+                    console.log(error);
+                }
+            });
+
+            // Get and display idea
+            startup.getIdea(function (error, result) {
+                if (!error) {
+                    $('input[name=idea]').val(result);
+                } else { 
+                    console.log(error);
+                }
+            });
+
+            // Get and display cash
+            startup.viewCash(function (error, result) {
+                if (!error) {
+                    $('input[name=cash]').val(result);
+                } else { 
+                    console.log(error);
+                }
+            });
+
+
+
+
+            // Enable claim button being clicked
+            function claimButtonClicked() { 
+                let ceo = $('#ceo').val();
+                let cfo = $('#cfo').val();
+                let coo = $('#coo').val();
+                let idea = $('#idea').val();
+                let invest = $('#invest').val();
+                startup.setCEO(ceo, function(error, result) {
+                    if(!error) {
+                    }
+                    else {
+                        alert('We have had an error setting the CEO.')
+                    }
+                })
+                startup.setCOO(coo, function(error, result) {
+                    if(!error) {
+                    }
+                    else {
+                        alert('We have had an error setting the COO.')
+                    }
+                })
+                startup.setCFO(cfo, function(error, result) {
+                    if(!error) {
+                    }
+                    else {
+                        alert('We have had an error setting the CFO.')
+                    }
+                })
+                startup.changeIdea(idea, function(error, result) {
+                    if(!error) {
+                    }
+                    else {
+                        alert('We have had an error changing the startup idea.')
+                    }
+                })
+                startup.invest(invest, function(error, result) {
+                    if(!error) {
+                    }
+                    else {
+                        alert('We have had an error investing your money.')
+                    }
+                })
+            }
+
+        </script>
+    </body>
+</html>
