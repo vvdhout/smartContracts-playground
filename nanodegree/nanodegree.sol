@@ -19,6 +19,11 @@ contract nanodegree {
         _;
     }
     
+    modifier isStudent {
+        require(bytes(students[msg.sender].email).length != 0);
+        _;
+    }
+    
     
     /* ===== Student creation =====
     =============================*/
@@ -68,6 +73,8 @@ contract nanodegree {
     /* ===== FUNCTIONS =====
     =============================*/
     
+    // ====== SET functionality ================
+    
     // Set a function named 'setStudent' that allows only the owner of the contract (using the modifier)
     // to set an address in the 'students' mapping with some values such as fName, lName, age, and email.
     function setStudent(address _address, string _fName, string _lName, uint _age, string _email) public onlyOwner {
@@ -76,7 +83,7 @@ contract nanodegree {
         students[_address].age = _age;
         students[_address].email = _email;
         // Add the student address to the studentArr
-        studentArr.push(_address) -1;
+        studentArr.push(_address);
     }
     
     // Set a function named 'setInstructor' that allows only the owner of the contract (using the modifier)
@@ -87,17 +94,52 @@ contract nanodegree {
         instructors[_address].age = _age;
         instructors[_address].email = _email;
         // Add the student address to the studentArr
-        instructorArr.push(_address) -1;
+        instructorArr.push(_address);
     }
+    
+    
+    // ===== GET functionality ====================
     
     // Setting a function to get student information from an ethereum address (returning some of the mapped values)
     function getStudent(address _address) public view returns (string _fName, string _lName, uint _age, string _email) {
         return (students[_address].fName, students[_address].lName, students[_address].age, students[_address].email);
     }
     
+    function getStudentMeta(address _address) public view returns (string _course, uint _courseID, uint _progress, uint _rating, string _review) {
+        return (students[_address].course, students[_address].courseID, students[_address].progress, students[_address].rating, students[_address].review);
+    }
+    
     // Setting a function to get student information from an ethereum address (returning some of the mapped values)
     function getInstructor(address _address) public view returns (string _fName, string _lName, uint _age, string _email) {
         return (instructors[_address].fName, instructors[_address].lName, instructors[_address].age, instructors[_address].email);
+    }
+    
+    
+    // ===== Student functionality ===============
+    
+    // Set a function that allows a student to sign up (having connected via an ethereum address e.g. via MetaMask)
+    function signUpStudent(string _fName, string _lName, uint _age, string _email) public {
+        students[msg.sender].fName = _fName;
+        students[msg.sender].lName = _lName;
+        students[msg.sender].age = _age;
+        students[msg.sender].email = _email;
+    }
+    
+    // A student can set the course they follow, providing course name and courseID
+    function setCourse(string _course, uint _courseID) public isStudent {
+        students[msg.sender].course = _course;
+        students[msg.sender].courseID = _courseID;
+    }
+    
+    // A student can leave a rating for the nanodegree
+    function rate(uint _rating) public isStudent {
+        require(_rating > 0 && _rating <= 10);
+        students[msg.sender].rating = _rating;
+    }
+    
+    // A student can write a review for the nanodegree
+    function writeReview(string _review) public isStudent {
+        students[msg.sender].review = _review;
     }
     
 }
