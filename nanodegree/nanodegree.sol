@@ -30,6 +30,7 @@ contract nanodegree {
     
     // Create a struct variable that holds a student's information
     struct student {
+        uint index;
         string fName;
         string lName;
         uint age;
@@ -54,6 +55,7 @@ contract nanodegree {
     
     // Create a struct variable that holds an instructor's information
     struct instructor {
+        uint index;
         string fName;
         string lName;
         uint age;
@@ -62,7 +64,7 @@ contract nanodegree {
         uint courseID;
     }
     
-    // Create a mapping named 'instructors' that mapps and ethereum address to an instructor struct
+    // Create a mapping named 'instructors' that mapps an ethereum address to an instructor struct
     // linking an address to an instructor's information
     mapping (address => instructor) public instructors;
     
@@ -78,6 +80,8 @@ contract nanodegree {
     // Set a function named 'setStudent' that allows only the owner of the contract (using the modifier)
     // to set an address in the 'students' mapping with some values such as fName, lName, age, and email.
     function setStudent(address _address, string _fName, string _lName, uint _age, string _email) public onlyOwner {
+        uint indexNr = studentArr.length;
+        students[_address].index = indexNr;
         students[_address].fName = _fName;
         students[_address].lName = _lName;
         students[_address].age = _age;
@@ -89,12 +93,26 @@ contract nanodegree {
     // Set a function named 'setInstructor' that allows only the owner of the contract (using the modifier)
     // to set an address in the 'instructors' mapping with some values such as fName, lName, age, and email.
     function setInstructor(address _address, string _fName, string _lName, uint _age, string _email) public onlyOwner {
+        uint indexNr = instructorArr.length;
+        instructors[_address].index = indexNr;
         instructors[_address].fName = _fName;
         instructors[_address].lName = _lName;
         instructors[_address].age = _age;
         instructors[_address].email = _email;
         // Add the student address to the studentArr
         instructorArr.push(_address);
+    }
+    
+    // Owner can delete a student from the nanodegree
+    function delStudent(address _address) public onlyOwner {
+        delete(studentArr[students[_address].index]);
+        delete(students[_address]);
+    }
+    
+    // Owner can delete an instructor from the nanodegree
+    function delInstructor(address _address) public onlyOwner {
+        delete(instructorArr[instructors[_address].index]);
+        delete(instructors[_address]);
     }
     
     
