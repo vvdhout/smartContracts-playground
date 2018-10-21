@@ -122,166 +122,38 @@
   background-color: #fbfbfb;
 }
 
-.sidebar {
-  width: 25%;
-  padding: 25px 35px;
-  text-align: center;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-  display: inline-block;
-  vertical-align: top;
-  border: 0.5px solid #eee;
-  box-shadow: 3px 3px 10px 0 #eee;
-  background-color: #fff;
-}
-
-.sidebar .profile-image img {
-  width: 100%;
-  border-radius: 50%;
-  border: 0.5px solid #eee;
-  box-shadow: 3px 3px 10px 0 #eee;
-}
-
-.social-info {
-  padding: 20px 5%;
-  font-size: 0.7rem;
-  color: #555;
-  letter-spacing: 1px;
-  margin-top: 20px;
-  border: 0.5px solid #eee;
-}
-
-.social-info .networks {
-  font-size: 1.7rem;
-  margin-bottom: 5px;
-}
-
-.social-info .networks i {
-  margin: auto 10px;
-  color: #29CE9A;
-}
-
-.social-info .networks i:hover {
-  opacity: 0.8;
-}
-
-.social-info #getemail:hover {
-  cursor: pointer;
-  cursor: hand; 
-  opacity: 0.8;
-}
-
-.sb-buttons {
-  font-size: 1.4rem;
-}
-
-.sb-buttons .button {
-  padding: 10px 25px;
-  width: 40%;
-  margin: 30px auto;
-  background-color: #333;
-  color: #fff;
-  border-radius: 2px;
-  box-shadow: 5px 5px 12px 0 #ddd;
-  transition: 0.5s;
-}
-
-.sb-buttons .button:hover {
-  cursor: pointer;
-  cursor: hand;
-  box-shadow: 3px 3px 10px 0 #eee;
-  transition: 0.5s;
-}
-
-
-.core {
-  
-}
-
-.core {
-  width: 75%;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-  padding: 0 10px 0 60px;
-  display: inline-block;
-  vertical-align: top;
-}
-
-.core .basics {
-  border: 0.5px solid #eee;
-  box-shadow: 3px 3px 10px 0 #eee;
-  padding: 15px 45px 30px;
-  background-color: #fff;
-}
-
-.core .basics h1 {
-  font-size: 3.5rem;
-  margin: 0;
-  font-weight: 300;
-}
-
-.core #address {
-  margin-top: -8px;
-  letter-spacing: 2.5px;
-  margin-bottom: 8px;
-  color: #999;
-  font-size: 0.9rem;
-}
-
-.core .basics hr {
-  border: 0.5px solid #ddd;
-  margin: 10px auto;
-}
-
-.core .basics p {
-  font-size: 1rem;
-  margin: 0;
-  letter-spacing: 0.5px;
-  text-align: justify;
-}
-
-.core .basics #timest {
-  color: #999;
-  font-size: 1rem;
-}
-
-.images {
-  margin-top: 40px;
-  padding: 15px;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
-.images .row {
-  clear: both;
-}
-
-.images img {
-  width: 47%;
-  box-shadow: 5px 5px 15px 0 #ccc;
+.home form {
+  width: 35%;
   margin: auto;
-  vertical-align: middle;
-  margin-bottom: 40px;
-  transition: 0.5s;
 }
 
-.images img:hover {
-  box-shadow: 3px 3px 12px 0 #ddd;
-  transition: 0.5s;
-  cursor: hand;
-  cursor: pointer;
+.home form input, .home form textarea{
+  width: 100%;
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
 }
 
-.images .row img:first-child {
-  float: left;
+.home form #createProfile {
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  background-color: #29CE9A;
+    border: 2px solid #29CE9A;
+    color: #fff;
+    font-weight: 400;
+    letter-spacing: 0.8px;
+    border-radius: 2px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
-.images .row img:nth-child(2) {
-  float: right;
+.home form #createProfile:hover {
+      cursor: pointer;
+    cursor: hand;
+    opacity: 0.8;
 }
+
   </style>
 
   <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
@@ -316,52 +188,21 @@
   
   <div class="home">
     
-    <!-- This sidebar contains some of the person's information such as the profile picture, age (when revealed), email (when revealed), and a few buttons that navigate to sub information -->
-    <div class="sidebar">
-      <div class="profile-image">
-        <img id="profilePic" src="https://images.unsplash.com/photo-1533557188897-ef2bc7257ba3?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=e4aa35edaa52b128fd06333630074684&auto=format&fit=crop&w=500&q=60" />
-      </div>
-      
-      <div class="social-info">
-        <div class="networks"><a id="twitterURL" href="https://twitter.com/jdburani/"><i class="fab fa-twitter"></i></a><a id="facebookURL" href="https://facebook.com/jdburani/"><i class="fab fa-facebook"></i></a><a id="githubURL" href="https://github.com/jdburani/"><i class="fab fa-github"></i></a></div>
-        <div id="email"><span id="getemail">[SEE EMAIL]</span></div>
-      </div>
-      
-      <div class="sb-buttons">
-        <div class="button">
-          SKILLS
-        </div>
-        <div class="button">
-          HOBBIES
-        </div>
-        <div class="button">
-          WORK
-        </div>
-      </div>
-      
-    </div>
-    
-    <!-- This div will make up the majority of the page, containing information such as full name, bio, social buttons, and images. -->
-    <div class="core">
-      <div class="basics">
-        <h1><span id="fName"></span> <span id="lName"></h1>
-<div id="address"></div>
-        <hr>
-        <p><span id="timest"><i>23rd of January, 2018 -</i></span> <span id="bio">I am an avid programmer with a background in distributed ledger technology and a formal education in Cryptography. Currently working @tokenbasher.io; student of the Udacity Blockchain Developer Nanodegree. Fanatic swimmer on the side.</span></p>
-      </div>
-      
-      <div class="images">
-        <div class="row">
-          <img src="https://images.unsplash.com/photo-1523464862212-d6631d073194?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=1917d113c1f77cc8f60e1f2da0c9c47d&auto=format&fit=crop&w=500&q=60" />
-          <img src="https://images.unsplash.com/photo-1530995377270-ac41692cd439?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=e3832424b5fb3cfcf0ea0de07bd96443&auto=format&fit=crop&w=500&q=60" />
-        </div>
-        <div class="row">
-          <img src="https://images.unsplash.com/photo-1526080676457-4544bf0ebba9?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=b737ad3b3a556eba651416be8846bb0f&auto=format&fit=crop&w=500&q=60" />
-          <img src="https://images.unsplash.com/photo-1533727745100-e50cf931def7?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=591fea7fe7d229d2f81fbc034a6b0834&auto=format&fit=crop&w=500&q=60" />
-        </div>
-      </div>
-      
-    </div>
+    <!--This page will hold a super simple form that allows profile creation on Disisme using MetaMask as the address provider and validator. -->
+    <form method="get" action="../u/">
+
+      <input type="text" id="fName" placeholder="First name (e.g. Vitalik)">
+      <input type="text" id="lName" placeholder="Last name (e.g. Nakamoto)">
+      <input type="number" id="age" placeholder="Age in int (e.g. 27)">
+      <input type="email" id="email" placeholder="Email (e.g. nakamoto.buterin@distributed.com)">
+      <textarea type="text" id="bio" rows="6" placeholder="Bio (e.g. I am the creator of the first succesfull and widely distrubuted P2P digital cash system, after which I decided we should use a similar system to decentralize many more applications. Also, I like swimming.)"></textarea>
+      <input type="text" id="profilePic" placeholder="Favorite Image in URL address (e.g. https://example.com/img/thisawesomeimage.png)">
+      <input style="display: none;" type="text" id="address" name="address">
+      <div id="createProfile" value="Create profile">Create a profile</div>
+      <input style="display: none;" type="submit" id="submit">
+
+    </form>
+
   </div>
   
   
@@ -379,7 +220,7 @@ if (typeof web3 !== 'undefined') {
 }
 
 // Specify the default account
-web3.eth.defaultAccount = web3.eth.accounts[0];
+web3.eth.defaultAccount = web3.eth.accounts[2];
 console.log('Default account: ' + web3.eth.defaultAccount);
 
 // Provide ABI that functions that interface between the contract and JS
@@ -687,62 +528,23 @@ const disisme = disismeContract.at('0xc78c993e0558b4657e2b86ba8da4b755d2082ce7')
 // Here we will start to actually implement functions that pull data from the blockchain and communicate with the SC
 // ===================================================================================================================
 
-// Get address parameter from url
-let url_string = window.location.href;
-let url = new URL(url_string);
-let _address = url.searchParams.get("address");
-console.log('Queries address: ' + _address);
-
-
-// Get basic person information
-disisme.getPersonBase(_address, function(error, result) {
-  if (error) {
-    alert('Something went wrong fetching the data. Info below is placeholder data.')
-    $('#fName').html('Jane');
-    $('#lName').html('Doe');
-    $('#bio').html('I am an avid programmer with a background in distributed ledger technology and a formal education in Cryptography. Currently working @tokenbasher.io; student of the Udacity Blockchain Developer...');
-    $('#address').html('0x1234567a9b8d296c39d04659978c0b1edb6a13ff')
-  } else {
-    if(!result[0]) {
-      alert('This address does not exist in our database. Info below is placeholder data.')
-      $('#fName').html('Jane');
-      $('#lName').html('Doe');
-      $('#bio').html('I am an avid programmer with a background in distributed ledger technology and a formal education in Cryptography. Currently working @tokenbasher.io; student of the Udacity Blockchain Developer...');
-      $('#address').html('0x1234567a9b8d296c39d04659978c0b1edb6a13ff')
+//NOTE THERE IS AN ERROR IN HERE SOMEWHERE
+$('#createProfile').click(function() {
+  let _fName = $('#fName').val();
+  let _lName = $('#lName').val();
+  let _age = parseInt($('#age').val());
+  let _email = $('#email').val();
+  let _bio = $('#bio').val();
+  let _profilePic = $('#profilePic').val();
+  disisme.createProfile(_fName, _lName, _age, _email, _bio, _profilePic, function(error, result) {
+    if(error) {
+      alert('We were not able to create the profile. Check the console for further information.')
     } else {
-      $('#fName').html(result[0]);
-      $('#lName').html(result[1]);
-      $('#bio').html(result[2]);
-      $('#profilePic').attr('src', result[3]);
-      $('#address').html(_address);
-    }
-  }
-})
-
-// Import social network information
-
-disisme.getPersonSocial(_address, function(error, result) {
-  if(error) {
-    console.log('Error fetching social data.')
-  } else {
-    $('#twitterURL').attr("href", result[1]);
-    $('#facebookURL').attr("href", result[0]);
-    $('#githubURL').attr("href", result[2]);
-  }
-})
-
-// Get email functionality
-$('#getemail').click(function() {
-  disisme.getEmail(_address, function(error, result) {
-    if (error) {
-      alert('Something went wrong fetching, or you are not allowed to see this email because you are not added as a friend by this person.')
-    } else {
-      $('#getemail').del();
-      $('#email').html(result[0]);
+      $('#address').val(web3.eth.defaultAccount);
+      $('#submit').click();
     }
   })
 })
-
 
 </script>
 

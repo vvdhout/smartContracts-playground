@@ -12,8 +12,12 @@ app.set('views', path.join(__dirname, 'views'));
 
 // app.use(express.static(__dirname + '/'));
 
-// Calling the home.ejs file from the views folder when on / 
-app.get('/', (req, res) => { 
+// Calling the profile.ejs file from the views folder when on /u
+app.get('/u/', (req, res) => { 
 	res.render('profile');
 });
 
+// Calling the create.ejs file from the views folder when on /create/
+app.get('/create/', (req, res) => { 
+	res.render('create');
+});
