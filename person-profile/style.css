@@ -128,11 +128,12 @@ body {
   width: 100%;
   border-radius: 50%;
   border: 0.5px solid #eee;
+  box-shadow: 3px 3px 10px 0 #eee;
 }
 
 .social-info {
   padding: 20px 5%;
-  font-size: 1rem;
+  font-size: 0.7rem;
   color: #555;
   letter-spacing: 1px;
   margin-top: 20px;
@@ -149,6 +150,10 @@ body {
   color: #29CE9A;
 }
 
+.social-info .networks i:hover {
+  opacity: 0.8;
+}
+
 .sb-buttons {
   font-size: 1.4rem;
 }
@@ -160,7 +165,15 @@ body {
   background-color: #333;
   color: #fff;
   border-radius: 2px;
+  box-shadow: 5px 5px 12px 0 #ddd;
+  transition: 0.5s;
+}
+
+.sb-buttons .button:hover {
+  cursor: pointer;
+  cursor: hand;
   box-shadow: 3px 3px 10px 0 #eee;
+  transition: 0.5s;
 }
 
 
@@ -199,10 +212,16 @@ body {
   font-size: 0.9rem;
 }
 
+.core .basics hr {
+  border: 0.5px solid #ddd;
+  margin: 10px auto;
+}
+
 .core .basics p {
   font-size: 1rem;
   margin: 0;
   letter-spacing: 0.5px;
+  text-align: justify;
 }
 
 .core .basics span {
@@ -224,10 +243,18 @@ body {
 
 .images img {
   width: 47%;
-  box-shadow: 5px 5px 15px 0 #ddd;
+  box-shadow: 5px 5px 15px 0 #ccc;
   margin: auto;
   vertical-align: middle;
   margin-bottom: 40px;
+  transition: 0.5s;
+}
+
+.images img:hover {
+  box-shadow: 3px 3px 12px 0 #ddd;
+  transition: 0.5s;
+  cursor: hand;
+  cursor: pointer;
 }
 
 .images .row img:first-child {
