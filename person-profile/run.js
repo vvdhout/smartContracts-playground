@@ -10,7 +10,10 @@ app.listen(8000, () => {
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+// app.use(express.static(__dirname + '/'));
+
 // Calling the home.ejs file from the views folder when on / 
 app.get('/', (req, res) => { 
 	res.render('profile');
 });
+

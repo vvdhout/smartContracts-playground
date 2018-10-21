@@ -1,0 +1,266 @@
+body {
+  color: #333;
+  font-family: Calibri, Arial;
+  font-size: 0;
+  margin: 0;
+}
+
+.nav {
+  padding: 20px 40px;
+  -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  border-bottom: 0.5px solid lightgrey;
+}
+
+.nav div {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.nav .logo {
+  width: 15%;
+  font-size: 1.8rem;
+  letter-spacing: 1.4px;
+  font-weight: 600;
+}
+
+.nav .search {
+  width: 50%;
+}
+
+.nav .search #search {
+  width: 80%;
+  margin-right: 1%;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  letter-spacing: 0.8px;
+}
+
+.nav .search #submit {
+  padding: 10px;
+  background-color: #29CE9A;
+  border: 2px solid #29CE9A;
+  color: #fff;
+  font-weight: 400;
+  letter-spacing: 0.8px;
+  border-radius: 2px;
+  -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+#submit:hover {
+  cursor: pointer;
+  cursor: hand;
+  opacity: 0.8;
+}
+
+.nav .buttons {
+  width: 35%;
+  text-align: right;
+}
+
+.nav .buttons ul {
+  list-style: none;
+}
+
+.nav .buttons ul li {
+  display: inline-block;
+  padding: 0 5%;
+  color: #333;
+  -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  font-size: 1rem;
+}
+
+.nav .buttons ul a:hover li {
+  color: #29CE9A
+}
+
+#signup {
+  padding: 10px;
+  background-color: #29CE9A;
+  border: 2px solid #29CE9A;
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  border-radius: 2px;
+  -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+#signup:hover {
+  cursor: pointer;
+  cursor: hand;
+  opacity: 0.8;
+}
+
+/* Moving to the main content */
+
+.home {
+  padding: 4% 8%;
+  background-color: #fbfbfb;
+}
+
+.sidebar {
+  width: 25%;
+  padding: 25px 35px;
+  text-align: center;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  display: inline-block;
+  vertical-align: top;
+  border: 0.5px solid #eee;
+  box-shadow: 3px 3px 10px 0 #eee;
+  background-color: #fff;
+}
+
+.sidebar .profile-image img {
+  width: 100%;
+  border-radius: 50%;
+  border: 0.5px solid #eee;
+  box-shadow: 3px 3px 10px 0 #eee;
+}
+
+.social-info {
+  padding: 20px 5%;
+  font-size: 0.7rem;
+  color: #555;
+  letter-spacing: 1px;
+  margin-top: 20px;
+  border: 0.5px solid #eee;
+}
+
+.social-info .networks {
+  font-size: 1.7rem;
+  margin-bottom: 5px;
+}
+
+.social-info .networks i {
+  margin: auto 10px;
+  color: #29CE9A;
+}
+
+.social-info .networks i:hover {
+  opacity: 0.8;
+}
+
+.sb-buttons {
+  font-size: 1.4rem;
+}
+
+.sb-buttons .button {
+  padding: 10px 25px;
+  width: 40%;
+  margin: 30px auto;
+  background-color: #333;
+  color: #fff;
+  border-radius: 2px;
+  box-shadow: 5px 5px 12px 0 #ddd;
+  transition: 0.5s;
+}
+
+.sb-buttons .button:hover {
+  cursor: pointer;
+  cursor: hand;
+  box-shadow: 3px 3px 10px 0 #eee;
+  transition: 0.5s;
+}
+
+
+.core {
+  
+}
+
+.core {
+  width: 75%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  padding: 0 10px 0 60px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.core .basics {
+  border: 0.5px solid #eee;
+  box-shadow: 3px 3px 10px 0 #eee;
+  padding: 15px 45px 30px;
+  background-color: #fff;
+}
+
+.core .basics h1 {
+  font-size: 3.5rem;
+  margin: 0;
+  font-weight: 300;
+}
+
+.core #address {
+  margin-top: -8px;
+  letter-spacing: 2.5px;
+  margin-bottom: 8px;
+  color: #999;
+  font-size: 0.9rem;
+}
+
+.core .basics hr {
+  border: 0.5px solid #ddd;
+  margin: 10px auto;
+}
+
+.core .basics p {
+  font-size: 1rem;
+  margin: 0;
+  letter-spacing: 0.5px;
+  text-align: justify;
+}
+
+.core .basics span {
+  color: #999;
+  font-size: 1rem;
+}
+
+.images {
+  margin-top: 40px;
+  padding: 15px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.images .row {
+  clear: both;
+}
+
+.images img {
+  width: 47%;
+  box-shadow: 5px 5px 15px 0 #ccc;
+  margin: auto;
+  vertical-align: middle;
+  margin-bottom: 40px;
+  transition: 0.5s;
+}
+
+.images img:hover {
+  box-shadow: 3px 3px 12px 0 #ddd;
+  transition: 0.5s;
+  cursor: hand;
+  cursor: pointer;
+}
+
+.images .row img:first-child {
+  float: left;
+}
+
+.images .row img:nth-child(2) {
+  float: right;
+}
