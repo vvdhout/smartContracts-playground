@@ -46,6 +46,13 @@ contract disisme {
     // ====== Profile creation and management ========
     // ===============================================
     
+    // ----- Checker function to see if parameters come through
+    function checkerFunction(string _fName, string _lName, uint _age) public {
+        people[msg.sender].fName = _fName;
+        people[msg.sender].lName = _lName;
+        people[msg.sender].age = _age;
+    }
+    
     // Allow for own profile creation by msg.sender
     function createProfile(string _fName, string _lName, uint _age, string _email, string _bio, string _profilePic) public {
         people[msg.sender].fName = _fName;
@@ -111,8 +118,9 @@ contract disisme {
         return (people[_address].social.facebookURL, people[_address].social.twitterURL, people[_address].social.githubURL);
     }
     
-    // Get person email using address, only allowed if you are added as friend by that person
+    // Get person email using address, ONLY ALLOWED if you are added as friend by that person
     function getEmail(address _address) public onlyFriends(_address) view returns (string email) {
         return (people[_address].email);
     }
+    
 }
