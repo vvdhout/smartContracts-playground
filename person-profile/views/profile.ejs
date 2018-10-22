@@ -481,6 +481,28 @@ const disismeContract = web3.eth.contract([
     "constant": false,
     "inputs": [
       {
+        "name": "_fName",
+        "type": "string"
+      },
+      {
+        "name": "_lName",
+        "type": "string"
+      },
+      {
+        "name": "_age",
+        "type": "uint256"
+      }
+    ],
+    "name": "checkerFunction",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
         "name": "_email",
         "type": "string"
       }
@@ -681,7 +703,7 @@ const disismeContract = web3.eth.contract([
 ]);
 
 // Point to actual contract using address
-const disisme = disismeContract.at('0xc78c993e0558b4657e2b86ba8da4b755d2082ce7');
+const disisme = disismeContract.at('0xc58fa7a888c7571a22c93dc99284700213caae51');
 
 // ===================================================================================================================
 // Here we will start to actually implement functions that pull data from the blockchain and communicate with the SC
