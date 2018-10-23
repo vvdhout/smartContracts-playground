@@ -4,8 +4,8 @@
   <meta name="viewport" content="width=device-width">
   <meta charset="utf-8">
 
-  <title>Jane Doe - Decentralized Profile Pages by Disisme</title>
-  <meta name="description" content="Jane Doe's Profile on Disisme - I am an avid programmer with a background in distributed ledger technology and a formal education in Cryptography. Currently working @tokenbasher.io; student...">
+  <title>Add Friends - Decentralized Profile Pages by Disisme</title>
+  <meta name="description" content="Here you can add social network information for facebook, twitter, and github.">
 
   <!-- <link rel="stylesheet" type="text/css" src="../css/style.css"> -->
 
@@ -125,6 +125,7 @@
 .home form {
   width: 35%;
   margin: auto;
+  display: inline-block;
 }
 
 .home form input, .home form textarea{
@@ -134,7 +135,7 @@
   margin-bottom: 20px;
 }
 
-.home form #createProfile {
+.home form #addFriendButton, .home form #remFriendButton {
   padding: 10px 20px;
   font-size: 0.9rem;
   background-color: #29CE9A;
@@ -148,10 +149,19 @@
     box-sizing: border-box;
 }
 
-.home form #createProfile:hover {
+.home form #addFriendButton:hover, .home form #remFriendButton:hover {
       cursor: pointer;
     cursor: hand;
     opacity: 0.8;
+}
+
+.home h3 {
+  font-size: 1.6rem;
+  margin-bottom: 15px;
+}
+
+.home p {
+  font-size: 1rem;
 }
 
   </style>
@@ -191,17 +201,21 @@
     <!--This page will hold a super simple form that allows profile creation on Disisme using MetaMask as the address provider and validator. -->
     <form method="get" action="../u/">
 
-      <input type="text" id="fName" placeholder="First name (e.g. Vitalik)">
-      <input type="text" id="lName" placeholder="Last name (e.g. Nakamoto)">
-      <input type="number" id="age" placeholder="Age in int (e.g. 27)">
-      <input type="text" id="email" placeholder="Email (e.g. nakamoto.buterin@distributed.com)">
-      <textarea type="text" id="bio" rows="6" placeholder="Bio (e.g. I am the creator of the first succesfull and widely distrubuted P2P digital cash system, after which I decided we should use a similar system to decentralize many more applications. Also, I like swimming.)"></textarea>
-      <input type="text" id="profilePic" placeholder="Favorite Image in URL address (e.g. https://example.com/img/thisawesomeimage.png)">
+      <h3>Add a friend (ETH address)</h3>
+      <p>This will allow them to view more personal information such as your email address, age, and more.</p>
+      <input type="text" id="friendAddressAdd" placeholder="ETH address (e.g. 0xca35b7d915458ef540ade6068dfe2f44e8fa733c)">
+      <div id="addFriendButton" value="Create profile">Add Friend</div>
+      <h3>Remove a friend (ETH address)</h3>
+      <p>This way you can remove a friend from the list so thye lose their permissions..</p>
+      <input type="text" id="friendAddressRem" placeholder="ETH address (e.g. 0xca35b7d915458ef540ade6068dfe2f44e8fa733c)">
+      <div id="remFriendButton" value="Create profile">Remove Friend</div>
       <input style="background-color: #eee; border: 0.5px solid lightgrey; color: #999;" type="text" id="address" name="address" readonly>
-      <div id="createProfile" value="Create profile">Create a profile</div>
       <input style="display: none;" type="submit" id="submitCreate">
 
     </form>
+
+    <div class="friendlist">
+    </div>
 
   </div>
   
@@ -579,47 +593,35 @@ const disisme = disismeContract.at('0x4940203b90d9c89707a0cd3f4fa1cba9619f270c')
 // Here we will start to actually implement functions that pull data from the blockchain and communicate with the SC
 // ===================================================================================================================
 
+
 // //NOTE THERE IS AN ERROR IN HERE SOMEWHERE
-$('#createProfile').click(function() {
+$('#addFriendButton').click(function() {
   web3.eth.defaultAccount = web3.eth.accounts[0];
   console.log('Submitted address: ' + web3.eth.defaultAccount);
   $('#address').attr('value', web3.eth.defaultAccount);
-  // let _fName = $('#fName').val();
-  // let _lName = $('#lName').val();
-  // let _age = parseInt($('#age').val());
-  // let _email = $('#email').val();
-  // let _bio = $('#bio').val();
-  // let _profilePic = $('#profilePic').val();
-  disisme.createProfile($('#fName').val(), $('#lName').val(), parseInt($('#age').val()), $('#email').val(), $('#bio').val(), $('#profilePic').val(), function(error, result) {
-  // disisme.checkerFunction($('#fName').val(), $('#lName').val(), parseInt($('#age').val()), function(error, result) {
+  disisme.addFriend($('#friendAddressAdd').val(), function(error, result) {
     if(error) {
-      alert('We were not able to create the profile. Check the console for further information.')
+      alert('We were not able to add this friend for some reason.')
     } else {
-      alert('Profile created! However, it can take a few minutes before it shows up on disisme. We will redirect you to you profile page but it will initially be filled with placeholder data. Try refreshing it in a minute or so. Cheers!')
-      $('#submitCreate').click();
+      alert('This address is added as a friend!')
     }
   })
+location.reload();
 })
 
-// //NOTE THERE IS AN ERROR IN HERE SOMEWHERE
-// $('#createProfile').click(function() {
-//   web3.eth.defaultAccount = web3.eth.accounts[0];
-//   console.log('Submitted address: ' + web3.eth.defaultAccount);
-//   $('#address').attr('value', web3.eth.defaultAccount);
-//   // let _fName = $('#fName').val();
-//   // let _lName = $('#lName').val();
-//   // let _age = parseInt($('#age').val());
-//   // let _email = $('#email').val();
-//   // let _bio = $('#bio').val();
-//   // let _profilePic = $('#profilePic').val();
-//   disisme.checkerFunction($('#fName').val(), $('#lName').val(), parseInt($('#age').val()), "empty", function(error, result) {
-//     if(error) {
-//       alert('We were not able to create the profile. Check the console for further information.')
-//     } else {
-//       $('#submitCreate').click();
-//     }
-//   })
-// })
+$('#remFriendButton').click(function() {
+  web3.eth.defaultAccount = web3.eth.accounts[0];
+  console.log('Submitted address: ' + web3.eth.defaultAccount);
+  $('#address').attr('value', web3.eth.defaultAccount);
+  disisme.removeFriend($('#friendAddressRem').val(), function(error, result) {
+    if(error) {
+      alert('We were not able to remove this friend for some reason.')
+    } else {
+      alert('This address has been removed from your friend list.')
+    }
+  })
+location.reload();
+})
 
 </script>
 

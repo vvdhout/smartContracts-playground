@@ -26,3 +26,8 @@ app.get('/create/', (req, res) => {
 app.get('/social/', (req, res) => { 
 	res.render('social');
 });
+
+// Calling the social.ejs file from the views folder when on /social/
+app.get('/friends/', (req, res) => { 
+	res.render('friends');
+});

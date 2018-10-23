@@ -478,25 +478,17 @@ const disismeContract = web3.eth.contract([
     "type": "function"
   },
   {
-    "constant": false,
-    "inputs": [
+    "constant": true,
+    "inputs": [],
+    "name": "getFriends",
+    "outputs": [
       {
-        "name": "_fName",
-        "type": "string"
-      },
-      {
-        "name": "_lName",
-        "type": "string"
-      },
-      {
-        "name": "_age",
-        "type": "uint256"
+        "name": "",
+        "type": "address[]"
       }
     ],
-    "name": "checkerFunction",
-    "outputs": [],
     "payable": false,
-    "stateMutability": "nonpayable",
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -608,11 +600,47 @@ const disismeContract = web3.eth.contract([
     "constant": false,
     "inputs": [
       {
+        "name": "_address",
+        "type": "address"
+      }
+    ],
+    "name": "removeFriend",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
         "name": "_url",
         "type": "string"
       }
     ],
     "name": "setTwitter",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_urlfb",
+        "type": "string"
+      },
+      {
+        "name": "_urltw",
+        "type": "string"
+      },
+      {
+        "name": "_urlgh",
+        "type": "string"
+      }
+    ],
+    "name": "setSocial",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -703,7 +731,7 @@ const disismeContract = web3.eth.contract([
 ]);
 
 // Point to actual contract using address
-const disisme = disismeContract.at('0xc58fa7a888c7571a22c93dc99284700213caae51');
+const disisme = disismeContract.at('0x4940203b90d9c89707a0cd3f4fa1cba9619f270c');
 
 // ===================================================================================================================
 // Here we will start to actually implement functions that pull data from the blockchain and communicate with the SC
