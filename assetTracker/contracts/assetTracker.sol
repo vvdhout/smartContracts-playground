@@ -72,6 +72,11 @@ contract assetTracker is ERC721Token {
     function putOnSale(uint256 _tokenId, uint256 _price) public onlyItemOwner(_tokenId) {
         itemsOnSale[_tokenId] = _price;
     }
+
+    // Allow any user to see if an item is on sale
+    function isOnSale(uint256 _tokenId) public view returns(uint256 _price) {
+        return itemsOnSale[_tokenId];
+    }
     
     // Allow the owner of an item to limit buy option to somebody that has reserved the right
     function setReserved(uint256 _tokenId, address _reservedBuyer) public onlyItemOwner(_tokenId) {
@@ -85,8 +90,9 @@ contract assetTracker is ERC721Token {
     // Allow somebody to buy an item if it is on sale
     function buyItem(uint256 _tokenId) public payable {
         // Require that the item is on sale, that the msg.value send is higher than the price, and that there are no reservation or that the msg.sender has the reservation
-        require(itemsOnSale[_tokenId] > 0 && msg.value >= itemsOnSale[_tokenId] && (reservedBy[_tokenId] == msg.sender || reservedBy[_tokenId] == 0x0000000000000000000000000000000000000000));
+        require(itemsOnSale[_tokenId] > 0 && msg.value >= itemsOnSale[_tokenId] && (reservedBy[_tokenId] == msg.sender || reservedBy[_tokenId] == address(0)));
         uint256 salePrice = itemsOnSale[_tokenId];
+        // We need to convert address to address payabale of the owner of the token
         address payable seller = address(uint160(this.ownerOf(_tokenId)));
         itemsOnSale[_tokenId] == 0;
         // Clear reservation
@@ -122,7 +128,7 @@ contract assetTracker is ERC721Token {
         // Clear approvals regarding the tokenId
         tokenToApproved[_tokenId] = address(0);
         // Clear reservation
-        reservedBy[_tokenId] = address(0)
+        reservedBy[_tokenId] = address(0);
     }
     
     
