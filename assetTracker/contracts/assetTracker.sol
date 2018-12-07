@@ -74,8 +74,13 @@ contract assetTracker is ERC721Token {
     }
 
     // Allow any user to see if an item is on sale
-    function isOnSale(uint256 _tokenId) public view returns(uint256 _price) {
-        return itemsOnSale[_tokenId];
+    function isOnSale(uint256 _tokenId) public view returns(bool _onSale, uint256 _price) {
+        if(itemsOnSale[_tokenId] == 0) {
+            return(false, 0);
+        }
+        else {
+            return(true, itemsOnSale[_tokenId]);
+        }
     }
     
     // Allow the owner of an item to limit buy option to somebody that has reserved the right
